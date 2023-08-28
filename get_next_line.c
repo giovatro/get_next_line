@@ -51,7 +51,6 @@ static char	*ft_find_line(int fd, char *buffer, char *stash)
 		temp = stash;
 		stash = ft_strjoin(temp, buffer);
 		free(temp);
-		temp = NULL;
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -66,14 +65,13 @@ char	*get_next_line(int fd)
 
 	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
-	buffer = (char *)malloc((sizeof(char)) * (BUFFER_SIZE + 1));
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
 	line = ft_find_line(fd, buffer, stash);
 	free(buffer);
-	buffer = NULL;
 	if (!line) 
-		return (line);
-	buffer = ft_extract_line(line);
+		return (NULL);
+	stash = ft_extract_line(line);
 	return (line);
 }

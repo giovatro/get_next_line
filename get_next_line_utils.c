@@ -87,20 +87,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s)
 {
 	size_t			size;
 	char			*ptr;
 	unsigned int	i;
 
-	size = ft_strlen(s1);
+	size = ft_strlen(s);
 	ptr = malloc(sizeof(char) * (size + 1));
 	i = 0;
 	if (!ptr)
 		return (NULL);
-	while (s1[i])
+	while (s[i])
 	{
-		ptr[i] = s1[i];
+		ptr[i] = s[i];
 		i++;
 	}
 	ptr[i] = '\0';
