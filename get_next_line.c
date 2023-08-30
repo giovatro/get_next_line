@@ -42,8 +42,12 @@ static char	*ft_find_line(int fd, char *buffer, char *stash)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
+		{
+			if (stash != NULL)
+				free(stash);
 			return (NULL);
-		else if (bytes_read == 0) 
+		}
+		else if (bytes_read == 0)
 			break ;
 		buffer[bytes_read] = '\0';
 		if (!stash)
@@ -71,7 +75,11 @@ char	*get_next_line(int fd)
 	line = ft_find_line(fd, buffer, stash);
 	free(buffer);
 	if (!line) 
+	{
+		if (stash != NULL)
+			stash = NULL;
 		return (NULL);
+	}
 	stash = ft_extract_line(line);
 	return (line);
 }
